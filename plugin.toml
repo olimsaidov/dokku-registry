@@ -1,0 +1,4 @@
+[plugin]
+description = "dokku plugin for deploying apps from registry images"
+version = "0.0.1"
+[plugin.config]

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+[[ " help registry:help " == *" $1 "* ]] || exit "$DOKKU_NOT_IMPLEMENTED_EXIT"
+set -eo pipefail
+[[ $DOKKU_TRACE ]] && set -x
+
+case "$1" in
+  help | registry:help)
+    help_content_func() {
+      declare desc="return registry plugin help content"
+      cat <<help_content
+    registry, Deployment from remote docker registry
+help_content
+    }
+
+    if [[ $1 == "registry:help" ]]; then
+      echo -e 'Usage: dokku registry:deploy <app> <tag> <image>'
+      echo ''
+      echo 'Pulls image from registry and deploys it.'
+      echo ''
+    else
+      help_content_func
+    fi
+    ;;
+
+  *)
+    exit "$DOKKU_NOT_IMPLEMENTED_EXIT"
+    ;;
+
+esac
